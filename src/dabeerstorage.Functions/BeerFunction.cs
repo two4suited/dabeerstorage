@@ -19,7 +19,15 @@ namespace DaBeerStorage.Functions
       
         public APIGatewayProxyResponse Create(APIGatewayProxyRequest request, ILambdaContext context)
         {
-            return CheckRequest(request) ?? null;
+            var check = CheckRequest(request);
+
+            if (check != null) return check;
+
+            return new APIGatewayProxyResponse()
+            {
+                Body = request.Body
+            };
+
         }
         public APIGatewayProxyResponse Drink(APIGatewayProxyRequest request,ILambdaContext context)
         {

@@ -15,7 +15,7 @@ namespace dabeerstorage.Infrastructure
             var searchResource = CreateResource("search", api);
             var locationResource = CreateResource("location", api);
             
-            AddMethod("Post",CreateFunction("CreateBeer","Beer"),beerResource);
+            AddMethod("Post",CreateFunction("Create","Beer"),beerResource);
             AddMethod("Post",CreateFunction("Drink","Beer"),AddResource("drink",beerResource));
             AddMethod("Get",CreateFunction("ListNotDrank","Beer"),AddResource("notdrank",beerResource));
             AddMethod("Post",CreateFunction("Move","Beer"),AddResource("move",beerResource));
@@ -57,7 +57,7 @@ namespace dabeerstorage.Infrastructure
             
             return new Function(this,methodName.ToLower(), new FunctionProps() {
                 Runtime = Runtime.DOTNET_CORE_2_1,
-                FunctionName = $"DaBeerStorage_{methodName}",
+                FunctionName = $"DaBeerStorage_{functionName}_{methodName}",
                 Timeout = Duration.Minutes(1),
                 MemorySize = 128,
                 Code = Code.FromAsset(pathToPublishFolder),

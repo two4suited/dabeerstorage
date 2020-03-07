@@ -14,7 +14,7 @@ namespace dabeerstorage.Functions
         public BeerFunction() { }
         
       
-        public string CreateBeer(string input, ILambdaContext context)
+        public string Create(string input, ILambdaContext context)
         {
             //var service = Host.Services.GetService<IConfigReader>();
             return input?.ToUpper();

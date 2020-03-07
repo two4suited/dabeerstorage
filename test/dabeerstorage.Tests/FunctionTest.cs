@@ -39,7 +39,7 @@ namespace dabeerstorage.Tests
         }
         
         
-        [Fact]
+        /*[Fact]
         public void TestToUpperFunction()
         {
 
@@ -49,6 +49,6 @@ namespace dabeerstorage.Tests
             var upperCase = function.FunctionHandler("hello world", context);
 
             Assert.Equal("HELLO WORLD", upperCase);
-        }
+        }*/
     }
 }

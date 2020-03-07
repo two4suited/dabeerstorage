@@ -24,7 +24,7 @@ namespace dabeerstorage.Functions
         public Function() : this(Startup.Build()) { }
         
       
-        public string FunctionHandler(string input, ILambdaContext context)
+        public string CreateBeer(string input, ILambdaContext context)
         {
             //var service = _host.Services.GetService<IConfigReader>();
             return input?.ToUpper();

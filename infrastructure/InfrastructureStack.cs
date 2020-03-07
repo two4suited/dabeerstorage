@@ -53,7 +53,7 @@ namespace dabeerstorage.Infrastructure
         private Function CreateFunction(string methodName,string functionName)
         {
             var pathToPublishFolder = "../src/dabeerstorage.Functions/bin/Release/netcoreapp2.1/publish";
-            var functionClass = $"DaBeerStorage.Functions::DaBeerStorage.Functions.{functionName}::";
+            var functionClass = $"DaBeerStorage.Functions::DaBeerStorage.Functions.{functionName}Function::";
             
             return new Function(this,$"{functionName.ToLower()}{methodName.ToLower()}", new FunctionProps() {
                 Runtime = Runtime.DOTNET_CORE_2_1,

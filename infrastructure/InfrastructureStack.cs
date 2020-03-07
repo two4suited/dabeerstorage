@@ -55,7 +55,7 @@ namespace dabeerstorage.Infrastructure
             var pathToPublishFolder = "../src/dabeerstorage.Functions/bin/Release/netcoreapp2.1/publish";
             var functionClass = $"dabeerstorage.Functions::dabeerstorage.Functions.{functionName}::";
             
-            return new Function(this,methodName.ToLower(), new FunctionProps() {
+            return new Function(this,$"{functionName.ToLower()}{methodName.ToLower()}", new FunctionProps() {
                 Runtime = Runtime.DOTNET_CORE_2_1,
                 FunctionName = $"DaBeerStorage_{functionName}_{methodName}",
                 Timeout = Duration.Minutes(1),

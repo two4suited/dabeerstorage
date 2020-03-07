@@ -8,8 +8,7 @@ namespace DaBeerStorage.Functions.Mappings
     {
         public BeerToBeerInfo()
         {
-            CreateMap<Beer, ById>();
-                /*
+            CreateMap<Beer, ById>()
                 .ForMember(x => x.Name, c => c.MapFrom(x => x.BeerName))
                 .ForMember(x => x.AlchoholByVolume, c => c.MapFrom(x => x.BeerAbv))
                 .ForMember(x => x.BreweryName, c => c.MapFrom(x => x.Brewery.BreweryName))
@@ -26,7 +25,7 @@ namespace DaBeerStorage.Functions.Mappings
                 .ForMember(dest => dest.DrankWhen, opt => opt.Ignore())
                 .ForMember(dest => dest.DateAdded, opt => opt.Ignore())
                 .ForMember(dest => dest.GaveWay, opt => opt.Ignore())
-                .ForMember(dest => dest.Location, opt => opt.Ignore());*/
+                .ForMember(dest => dest.Location, opt => opt.Ignore());
         }
     }
 }

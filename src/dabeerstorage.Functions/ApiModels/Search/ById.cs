@@ -1,6 +1,6 @@
 namespace DaBeerStorage.Functions.ApiModels.Search
 {
-    public class ById
+    public class ById : Models.Beer
     {
         
     }

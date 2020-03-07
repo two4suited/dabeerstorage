@@ -9,22 +9,30 @@ namespace dabeerstorage.Infrastructure
     {
         internal InfrastructureStack(Construct scope, string id, IStackProps props = null) : base(scope, id, props)
         {
-            var createbeerfunc = CreateFunction("CreateBeer");
-
-            var api = CreateAPI("DaBeerStorage");
+            var api = CreateApi("DaBeerStorage");
         
             var beerResource = CreateResource("beer",api);
             
-            AddMethod("Post",createbeerfunc,beerResource);
+            AddMethod("Post",CreateFunction("CreateBeer","Beer"),beerResource);
             
+            AddMethod("Post",CreateFunction("Drink","Beer"),AddResource("drink",beerResource));
+            
+            AddMethod("Get",CreateFunction("ListNotDrank","Beer"),AddResource("notdrank",beerResource));
+            
+            AddMethod("Post",CreateFunction("Move","Beer"),AddResource("move",beerResource));
         }
 
-        private RestApi CreateAPI(string name)
+        private RestApi CreateApi(string name)
         {
             return new RestApi(this, name.ToLower(), new RestApiProps()
             {
                 RestApiName = name
             });
+        }
+
+        private Resource AddResource(string path,Resource resource)
+        {
+            return resource.AddResource(path);
         }
 
         private Resource CreateResource(string path,RestApi api)
@@ -38,10 +46,10 @@ namespace dabeerstorage.Infrastructure
             apiGatewayResource.AddMethod(httpMethod, integration);
         }
         
-        private Function CreateFunction(string methodName)
+        private Function CreateFunction(string methodName,string functionName)
         {
             var pathToPublishFolder = "../src/dabeerstorage.Functions/bin/Release/netcoreapp2.1/publish";
-            var functionClass = "dabeerstorage.Functions::dabeerstorage.Functions.Function::";
+            var functionClass = $"dabeerstorage.Functions::dabeerstorage.Functions.{functionName}::";
             
             return new Function(this,methodName.ToLower(), new FunctionProps() {
                 Runtime = Runtime.DOTNET_CORE_2_1,

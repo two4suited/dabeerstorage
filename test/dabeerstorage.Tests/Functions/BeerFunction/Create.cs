@@ -1,7 +1,3 @@
-using System.Net;
-using Amazon.Lambda.APIGatewayEvents;
-using Amazon.Lambda.TestUtilities;
-using Microsoft.Extensions.Hosting;
 using Shouldly;
 using Xunit;
 

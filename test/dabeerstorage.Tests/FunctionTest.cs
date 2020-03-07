@@ -1,7 +1,3 @@
-using System;
-using Xunit;
-using Amazon.Lambda.TestUtilities;
-using DaBeerStorage.Functions;
 using Microsoft.Extensions.Hosting;
 
 namespace DaBeerStorage.Tests

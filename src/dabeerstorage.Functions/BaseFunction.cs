@@ -4,6 +4,7 @@ using System.Net;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 namespace DaBeerStorage.Functions
@@ -22,6 +23,19 @@ namespace DaBeerStorage.Functions
             {
                 Body = "Your Request can't be null",
                 StatusCode = (int) HttpStatusCode.BadRequest,
+                Headers = new Dictionary<string, string>
+                { 
+                    { "Content-Type", "application/json" }
+                }
+            };
+        }
+
+        protected APIGatewayProxyResponse Ok(object model)
+        {
+            return new APIGatewayProxyResponse()
+            {
+                Body = JsonConvert.SerializeObject(model),
+                StatusCode = (int) HttpStatusCode.OK,
                 Headers = new Dictionary<string, string>
                 { 
                     { "Content-Type", "application/json" }

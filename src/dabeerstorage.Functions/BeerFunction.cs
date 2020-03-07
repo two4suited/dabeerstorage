@@ -23,11 +23,7 @@ namespace DaBeerStorage.Functions
 
             if (check != null) return check;
 
-            return new APIGatewayProxyResponse()
-            {
-                StatusCode = 200,
-                Body = request.Body
-            };
+            return Ok(request.Body);
 
         }
         public APIGatewayProxyResponse Drink(APIGatewayProxyRequest request,ILambdaContext context)

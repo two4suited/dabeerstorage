@@ -12,7 +12,7 @@ namespace dabeerstorage.Infrastructure
                 FunctionName = "DaBeerStorage_CreateBeer",
                 Timeout = Duration.Minutes(1),
                 MemorySize = 128,
-                Code = Code.FromAsset("src/databeerstorage.Functions/bin/Release/netcoreapp2.1/publish"),
+                Code = Code.FromAsset("../src/databeerstorage.Functions/bin/Release/netcoreapp2.1/publish"),
                 Handler = "dabeerstorage.Functions::dabeerstorage.Functions.Function::CreateBeer"
             });
         }

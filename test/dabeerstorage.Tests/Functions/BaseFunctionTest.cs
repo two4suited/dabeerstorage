@@ -29,5 +29,13 @@ namespace DaBeerStorage.Tests.Functions
         {
             return method(null,Context);
         }
+
+        protected APIGatewayProxyResponse ReturnBadRequest_WhenModeInRequestIsNull(
+            Func<APIGatewayProxyRequest, TestLambdaContext, APIGatewayProxyResponse> method)
+        {
+            var request = new APIGatewayProxyRequest {Body = null};
+
+            return method(request, Context);
+        }
     }
 }

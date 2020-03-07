@@ -16,7 +16,7 @@ namespace DaBeerStorage.Functions
       
         protected BaseFunction() : this(Startup.Build()) { }
 
-        protected APIGatewayProxyResponse NullRequest()
+        private APIGatewayProxyResponse NullRequest()
         {
             return new APIGatewayProxyResponse()
             {
@@ -27,6 +27,25 @@ namespace DaBeerStorage.Functions
                     { "Content-Type", "application/json" }
                 }
             };
+        }
+
+        private APIGatewayProxyResponse NullModelRequest()
+        {
+            return new APIGatewayProxyResponse()
+            {
+                Body = "Your Json Payload is null",
+                StatusCode = (int) HttpStatusCode.BadRequest,
+                Headers = new Dictionary<string, string>
+                { 
+                    { "Content-Type", "application/json" }
+                }
+            };
+        }
+
+        protected APIGatewayProxyResponse CheckRequest(APIGatewayProxyRequest request)
+        {
+            if (request == null) return NullRequest();
+            return request.Body == null ? NullModelRequest() : null;
         }
     }
 }

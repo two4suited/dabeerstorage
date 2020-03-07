@@ -9,6 +9,10 @@ namespace DaBeerStorage.Tests.Functions.BeerFunction
         
         [Fact]
         public void ShouldReturnBadRequest_WhenRequestIsNull() =>
-            ReturnBadRequest_WhenRequestIsNull(fut.ListNotDrank).StatusCode.ShouldBe(BadRequest);
+            ReturnBadRequest_WhenRequestIsNull(mut.ListNotDrank).StatusCode.ShouldBe(BadRequest);
+        
+        [Fact]
+        public void ShouldReturnBadRequest_WhenRequestModelIsNull() =>
+            ReturnBadRequest_WhenModeInRequestIsNull(mut.ListNotDrank).StatusCode.ShouldBe(BadRequest);
     }
 }

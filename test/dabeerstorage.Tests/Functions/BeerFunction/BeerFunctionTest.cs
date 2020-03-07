@@ -2,10 +2,10 @@ namespace DaBeerStorage.Tests.Functions.BeerFunction
 {
     public class BeerFunctionTest : BaseFunctionTest
     {
-        protected DaBeerStorage.Functions.BeerFunction fut;
+        protected DaBeerStorage.Functions.BeerFunction mut;
         public BeerFunctionTest()
         {
-            fut = new DaBeerStorage.Functions.BeerFunction(Host);
+            mut = new DaBeerStorage.Functions.BeerFunction(Host);
         }
     }
 }

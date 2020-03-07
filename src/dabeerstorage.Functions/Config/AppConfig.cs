@@ -1,4 +1,4 @@
-namespace dabeerstorage.Functions
+namespace DaBeerStorage.Functions.Config
 {
     public class AppConfig
     {

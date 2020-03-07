@@ -5,7 +5,7 @@ using Microsoft.Extensions.Hosting;
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 
 
-namespace dabeerstorage.Functions
+namespace DaBeerStorage.Functions
 {
     public class BeerFunction : BaseFunction
     {
@@ -17,19 +17,27 @@ namespace dabeerstorage.Functions
       
         public APIGatewayProxyResponse Create(APIGatewayProxyRequest request, ILambdaContext context)
         {
+            if (request == null) return NullRequest();
+
             return null;
         }
         public APIGatewayProxyResponse Drink(APIGatewayProxyRequest request,ILambdaContext context)
         {
+            if (request == null) return NullRequest();
+
             return null;
         }
         
         public APIGatewayProxyResponse ListNotDrank(APIGatewayProxyRequest request, ILambdaContext context)
         {
+            if (request == null) return NullRequest();
+            
             return null;     
         }
          public APIGatewayProxyResponse Move(APIGatewayProxyRequest request, ILambdaContext context)
          {
+             if (request == null) return NullRequest();
+             
             return null;     
          }
     }

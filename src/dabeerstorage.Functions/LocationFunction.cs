@@ -2,7 +2,7 @@ using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using Microsoft.Extensions.Hosting;
 
-namespace dabeerstorage.Functions
+namespace DaBeerStorage.Functions
 {
     public class LocationFunction : BaseFunction
     {

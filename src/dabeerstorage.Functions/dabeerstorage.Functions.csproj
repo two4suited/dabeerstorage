@@ -4,7 +4,8 @@
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <AWSProjectType>Lambda</AWSProjectType>
     <LangVersion>8.0</LangVersion>
-    <RootNamespace>LambdawithDI.Functions</RootNamespace>
+    <RootNamespace>DaBeerStorage.Functions</RootNamespace>
+    <AssemblyName>DaBeerStorage.Functions</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Amazon.Lambda.APIGatewayEvents" Version="1.3.0" />

@@ -1,15 +1,15 @@
 using System;
 using Xunit;
 using Amazon.Lambda.TestUtilities;
-using dabeerstorage.Functions;
+using DaBeerStorage.Functions;
 using Microsoft.Extensions.Hosting;
 
-namespace dabeerstorage.Tests
+namespace DaBeerStorage.Tests
 {
     public class FunctionTest
     {
         private IHost _host;
-        private AppConfig _appConfig;
+       
         public FunctionTest()
         {
             var host = new HostBuilder();

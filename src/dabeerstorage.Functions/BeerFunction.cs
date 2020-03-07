@@ -28,11 +28,11 @@ namespace DaBeerStorage.Functions
         
         public APIGatewayProxyResponse ListNotDrank(APIGatewayProxyRequest request, ILambdaContext context)
         {
-            return CheckRequest(request) ?? null;    
+            return request == null ? NullRequest() : null; 
         }
          public APIGatewayProxyResponse Move(APIGatewayProxyRequest request, ILambdaContext context)
          {
-             return request == null ? NullRequest() : null;
+             return CheckRequest(request) ?? null;    
          }
     }
 }

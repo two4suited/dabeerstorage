@@ -59,7 +59,7 @@ namespace dabeerstorage.Infrastructure
                 Runtime = Runtime.DOTNET_CORE_2_1,
                 FunctionName = $"DaBeerStorage_{functionName}_{methodName}",
                 Timeout = Duration.Minutes(1),
-                MemorySize = 128,
+                MemorySize = 512,
                 Code = Code.FromAsset(pathToPublishFolder),
                 Handler = $"{functionClass}{methodName}"
             });

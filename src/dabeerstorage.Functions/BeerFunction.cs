@@ -1,3 +1,4 @@
+using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using Microsoft.Extensions.Hosting;
 
@@ -14,21 +15,20 @@ namespace dabeerstorage.Functions
         public BeerFunction() { }
         
       
-        public string Create(string input, ILambdaContext context)
+        public APIGatewayProxyResponse Create(APIGatewayProxyRequest request, ILambdaContext context)
         {
-            //var service = Host.Services.GetService<IConfigReader>();
-            return input?.ToUpper();
+            return null;
         }
-        public string Drink(string input,ILambdaContext context)
+        public APIGatewayProxyResponse Drink(APIGatewayProxyRequest request,ILambdaContext context)
         {
-            return input;
+            return null;
         }
         
-        public string ListNotDrank(string input, ILambdaContext context)
+        public APIGatewayProxyResponse ListNotDrank(APIGatewayProxyRequest request, ILambdaContext context)
         {
             return null;     
         }
-         public string Move(string input, ILambdaContext context)
+         public APIGatewayProxyResponse Move(APIGatewayProxyRequest request, ILambdaContext context)
          {
             return null;     
          }

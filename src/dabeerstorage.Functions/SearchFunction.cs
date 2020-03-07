@@ -1,3 +1,4 @@
+using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using Microsoft.Extensions.Hosting;
 
@@ -11,7 +12,7 @@ namespace dabeerstorage.Functions
         
         public SearchFunction(){ }
 
-        public string ByName(string input, ILambdaContext context)
+        public APIGatewayProxyResponse ByName(APIGatewayProxyRequest request, ILambdaContext context)
         {
             return null;
         }

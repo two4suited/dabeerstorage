@@ -1,3 +1,4 @@
+using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using Microsoft.Extensions.Hosting;
 
@@ -12,12 +13,12 @@ namespace dabeerstorage.Functions
 
         public LocationFunction(){ }
 
-        public string Create(string input, ILambdaContext context)
+        public APIGatewayProxyResponse Create(APIGatewayProxyRequest request, ILambdaContext context)
         {
             return null;
         }
 
-        public string List(string input, ILambdaContext context)
+        public APIGatewayProxyResponse List(APIGatewayProxyRequest request, ILambdaContext context)
         {
             return null;
         }

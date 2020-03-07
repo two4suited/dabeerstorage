@@ -8,10 +8,10 @@ namespace DaBeerStorage.Functions.Mappings
     {
         public SearchToCreate()
         {
-            CreateMap<Beer, Create>();
-            // .ForMember(dest => dest.BrewerDbId, opt => opt.Ignore())
-            // .ForMember(dest => dest.Quantity, opt => opt.Ignore())
-            // .ForMember(dest => dest.UserName, opt => opt.Ignore());
+            CreateMap<Beer, Create>()
+                .ForMember(dest => dest.BrewerDbId, opt => opt.Ignore())
+             .ForMember(dest => dest.Quantity, opt => opt.Ignore())
+             .ForMember(dest => dest.UserName, opt => opt.Ignore());
 
         }
 

@@ -12,14 +12,18 @@ namespace dabeerstorage.Infrastructure
             var api = CreateApi("DaBeerStorage");
         
             var beerResource = CreateResource("beer",api);
+            var searchResource = CreateResource("search", api);
+            var locationResource = CreateResource("location", api);
             
             AddMethod("Post",CreateFunction("CreateBeer","Beer"),beerResource);
-            
             AddMethod("Post",CreateFunction("Drink","Beer"),AddResource("drink",beerResource));
-            
             AddMethod("Get",CreateFunction("ListNotDrank","Beer"),AddResource("notdrank",beerResource));
-            
             AddMethod("Post",CreateFunction("Move","Beer"),AddResource("move",beerResource));
+            
+            AddMethod("Post",CreateFunction("Create","Location"),locationResource);
+            AddMethod("Get",CreateFunction("List","Location"),locationResource);
+            
+            AddMethod("Post",CreateFunction("ByName","Search"),searchResource);
         }
 
         private RestApi CreateApi(string name)

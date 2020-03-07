@@ -7,13 +7,22 @@ namespace dabeerstorage.Infrastructure
     {
         internal InfrastructureStack(Construct scope, string id, IStackProps props = null) : base(scope, id, props)
         {
+            CreateFunction("CreateBeer");
+           
+        }
+
+        private void CreateFunction(string methodName)
+        {
+            var pathToPublishFolder = "../src/dabeerstorage.Functions/bin/Release/netcoreapp2.1/publish";
+            var functionClass = "dabeerstorage.Functions::dabeerstorage.Functions.Function::";
+            
             var createbeer = new Function(this,"createbeer", new FunctionProps() {
                 Runtime = Runtime.DOTNET_CORE_2_1,
-                FunctionName = "DaBeerStorage_CreateBeer",
+                FunctionName = $"DaBeerStorage_{methodName}",
                 Timeout = Duration.Minutes(1),
                 MemorySize = 128,
-                Code = Code.FromAsset("../src/dabeerstorage.Functions/bin/Release/netcoreapp2.1/publish"),
-                Handler = "dabeerstorage.Functions::dabeerstorage.Functions.Function::CreateBeer"
+                Code = Code.FromAsset(pathToPublishFolder),
+                Handler = $"{functionClass}{methodName}"
             });
         }
     }

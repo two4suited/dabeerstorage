@@ -2,6 +2,8 @@
 using DaBeerStorage.Functions.Mappings;
 using Xunit;
 
+namespace DaBeerStorage.Tests.Mappings
+{
     public class BeerMappingTest
     {
 
@@ -27,4 +29,5 @@ using Xunit;
 
 
     }
+}
 

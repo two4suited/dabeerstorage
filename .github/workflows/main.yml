@@ -16,16 +16,16 @@ jobs:
       - name: Build with dotnet
         run: dotnet build src/**/*.csproj --configuration Release
       - name: Run Lambda Unit Tests
-        run: dotnet test tests/aws-gateway-lambda.lambda.Tests/aws-gateway-lambda.lambda.Tests.csproj
+        run: dotnet test tests/**/*.Tests.csproj
       - name: Publish Code
-        run: dotnet publish src/aws-gateway-lambda.lambda/aws-gateway-lambda.lambda.csproj --configuration Release
+        run: dotnet publish src/*.Functions/*.csproj --configuration Release
       - name: cdk deploy
         uses: two4suited/aws-cdk-dotnet-github-action@master
         with:
           cdk_subcommand: 'deploy'
           actions_comment: false
           cdk_requireapproval: 'never'
-          working_dir: 'src/aws-gateway-lambda.infrastructure'
+          working_dir: 'infrastructure'
           cdk_version: '1.24.0'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

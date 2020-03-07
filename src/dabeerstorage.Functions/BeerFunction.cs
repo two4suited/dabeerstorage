@@ -32,7 +32,7 @@ namespace DaBeerStorage.Functions
         }
          public APIGatewayProxyResponse Move(APIGatewayProxyRequest request, ILambdaContext context)
          {
-             return CheckRequest(request) ?? null;    
+             return request == null ? NullRequest() : null;
          }
     }
 }

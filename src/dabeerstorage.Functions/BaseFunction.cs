@@ -16,7 +16,7 @@ namespace DaBeerStorage.Functions
       
         protected BaseFunction() : this(Startup.Build()) { }
 
-        private APIGatewayProxyResponse NullRequest()
+        protected APIGatewayProxyResponse NullRequest()
         {
             return new APIGatewayProxyResponse()
             {

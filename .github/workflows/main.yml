@@ -16,7 +16,7 @@ jobs:
       - name: Build with dotnet
         run: dotnet build src/**/*.csproj --configuration Release
       - name: Run Lambda Unit Tests
-        run: dotnet test tests/**/*.Tests.csproj
+        run: dotnet test test/**/*.Tests.csproj
       - name: Publish Code
         run: dotnet publish src/*.Functions/*.csproj --configuration Release
       - name: cdk deploy

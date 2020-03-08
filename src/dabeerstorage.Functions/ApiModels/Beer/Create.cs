@@ -43,6 +43,7 @@ namespace DaBeerStorage.Functions.ApiModels.Beer
             if(string.IsNullOrEmpty(UserName)) AddErrorListString(nameof(UserName));
             if(string.IsNullOrEmpty(BeerName)) AddErrorListString(nameof(BeerName));
             if(string.IsNullOrEmpty(Description)) AddErrorListString(nameof(Description));
+            if(string.IsNullOrEmpty(Ibu)) AddErrorListString(nameof(Ibu));
             if(Quantity <= 0) ErrorList.Add("Quantity must be greater than 0");    
             if(CreateDate == DateTimeOffset.MinValue) ErrorList.Add("CreateDate can't be default value");
         }

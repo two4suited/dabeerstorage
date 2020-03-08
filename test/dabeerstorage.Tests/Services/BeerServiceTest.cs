@@ -23,7 +23,7 @@ namespace DaBeerStorage.Tests.Services
         [Theory,AutoData]
         public void Create_ShouldCallAddToMatchQuantity(int quantity,Create create)
         {
-            create.Quantity = quantity.ToString();
+            create.Quantity = quantity;
      
             _sut.Create(create);
 

@@ -17,13 +17,11 @@ namespace DaBeerStorage.Functions.ApiModels.Beer
         public DateTimeOffset CreateDate { get; set; }
         public string BeerId { get; set; }
         public string UntappedId { get; set; }
-        public string AlchoholByVolume { get; set; }
+        public string AlchoholByVolume { get; set; } 
         public string Description { get; set; }
         public string LabelPath { get; set; }
         public string Style { get; set; }
         public string Ibu { get; set; }
-        public string BrewerDbId { get; set; }
-        public string Rating { get; set; }
         public string Location { get; set; }
         public string BreweryName { get; set; }
         public string BreweryState { get; set; }

@@ -1,4 +1,6 @@
+using System.Threading;
 using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DataModel;
 using AutoFixture.Xunit2;
 using AutoMapper;
 using DaBeerStorage.Functions.Data;
@@ -13,29 +15,25 @@ namespace DaBeerStorage.Tests.Data
     public class DaBeerStorageRepositoryTest
     {
         private DaBeerStorageRepository _rut;
-        private Mock<IAmazonDynamoDB> _db;
         private Mock<IMapper> _map;
+        private Mock<IDynamoDBContext> _context;
         public DaBeerStorageRepositoryTest()
         {
-            _db = new Mock<IAmazonDynamoDB>();
+            _context = new Mock<IDynamoDBContext>();
             _map = new Mock<IMapper>();
 
-            _rut = new DaBeerStorageRepository(_db.Object,_map.Object);
+            _rut = new DaBeerStorageRepository(_context.Object,_map.Object);
         }
-        /*
+        
         [Theory,AutoData]
-        public void ShouldCallSetBeerKeys_WhenSaveBeer(string pk,Beer beer,DaBeerStorageTable dynamoTable)
+        public void ShouldCallSaveAsync_WhenSaveBeer(string pk,Beer beer)
         {
-            /*
-            var table = new Mock<DaBeerStorageTable>();
-            table.Setup(m => m(pk));
-            _map.Setup(x => x.Map<DaBeerStorageTable>(beer)).Returns((DaBeerStorageTable t) => dynamoTable);
-            
+            _context.Setup(x => x.SaveAsync(It.IsAny<DaBeerStorageTable>(), new CancellationToken()));
             _rut.SaveBeer(pk, beer);
             
-            table.Verify(x => x.SetBeerKeys(pk),Times.Once());
+            _context.Verify(x => x.SaveAsync(It.IsAny<DaBeerStorageTable>(),It.IsAny<CancellationToken>()),Times.Once());
             
         }
-        */
+        
     }
 }

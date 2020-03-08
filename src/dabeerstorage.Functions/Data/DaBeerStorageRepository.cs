@@ -13,15 +13,13 @@ namespace DaBeerStorage.Functions.Data
 {
     public class DaBeerStorageRepository : IDaBeerStorageRepository
     {
-        private IAmazonDynamoDB _client;
         private readonly IMapper _dynamoMapper;
-        private readonly DynamoDBContext _context;
+        private readonly IDynamoDBContext _context;
 
-        public DaBeerStorageRepository(IAmazonDynamoDB client, IMapper dynamoMapper)
+        public DaBeerStorageRepository(IDynamoDBContext context, IMapper dynamoMapper)
         {
-            _client = client;
             _dynamoMapper = dynamoMapper;
-            _context = new DynamoDBContext(client);
+            _context = context;
         }
 
         public async Task<Location> AddLocation(string pk,Location location)
@@ -29,6 +27,7 @@ namespace DaBeerStorage.Functions.Data
             var table = _dynamoMapper.Map<DaBeerStorageTable>(location);
             table.PK = pk;
             table.SK = "Location#" + location.Name;
+            
             await _context.SaveAsync(table);
             return location;
         }

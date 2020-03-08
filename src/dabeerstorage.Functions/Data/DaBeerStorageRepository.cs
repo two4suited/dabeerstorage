@@ -42,19 +42,11 @@ namespace DaBeerStorage.Functions.Data
             return locations;
         }
 
-        public async Task<Beer> AddBeer(string pk,Beer beer)
+        public async Task<Beer> SaveBeer(string pk,Beer beer)
         {
             beer.BeerId = Guid.NewGuid().ToString();
-            return await Save(pk,beer);
-        
-        }
-
-        private async Task<Beer> Save(string pk,Beer beer)
-        {
-            var item = _dynamoMapper.Map<DaBeerStorageTable>(beer);
-            item.PK=pk;
-            item.SK="Beer#"+beer.BeerId;
-            item.BreweryKey = "Brewery#" + item.BreweryName + "#" + item.BeerId;
+            var item = DaBeerStorageTable.MapFromBeer(beer,pk);
+            
             try
             {
                 await _context.SaveAsync(item);
@@ -78,11 +70,7 @@ namespace DaBeerStorage.Functions.Data
             return beer;  
         }
 
-        public async Task<Beer> UpdateBeer(string pk,Beer beer)
-        {
-            return await Save(pk,beer);
-        }
-
+      
         public async Task<List<Beer>> ListNotDrank(string pk)
         {
             var conditions = new List<ScanCondition>();

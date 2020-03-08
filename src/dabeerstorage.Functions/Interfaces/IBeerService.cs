@@ -8,8 +8,8 @@ namespace DaBeerStorage.Functions.Interfaces
     public interface IBeerService
     {
         Task Drink(Drink drink);
-        Beer Create(Create newBeer);
-        List<ListNotDrank> ListNotDrank();
+        Task Create(Create newBeer);
+        Task<ListNotDrank> ListNotDrank(ListNotDrank listNotDrank);
         Task Move(Move move);
     }
 }

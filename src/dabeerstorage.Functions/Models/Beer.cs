@@ -8,8 +8,6 @@ namespace DaBeerStorage.Functions.Models
         {
             Drank = null;
             DrankWhen = null;
-            DateAdded = DateTimeOffset.Now;
-          
         }
 
         public string BeerId { get; set; }

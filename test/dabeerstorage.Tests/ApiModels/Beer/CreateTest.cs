@@ -14,7 +14,8 @@ namespace DaBeerStorage.Tests.ApiModels.Beer
             create = new Create()
             {
                 BeerName = "Test",
-                UserName = "Test"
+                UserName = "Test",
+                Description = "Test"
             };
         }
         [Fact]
@@ -29,6 +30,29 @@ namespace DaBeerStorage.Tests.ApiModels.Beer
         public void Valid_ShouldBe_False_When_UserName_Is_EmptyString()
         {
             create.UserName = "";
+            create.Validate();
+            create.Valid.ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Valid_ShouldBe_True_When_Description_Has_Value()
+        {
+            create.Validate();
+            create.Valid.ShouldBeTrue();
+        }
+        
+        [Fact]
+        public void Valid_ShouldBe_False_When_Description_Is_Null()
+        {
+            create.Description = null;
+            create.Validate();
+            create.Valid.ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Valid_ShouldBe_False_When_Description_Is_EmptyString()
+        {
+            create.Description = "";
             create.Validate();
             create.Valid.ShouldBeFalse();
         }

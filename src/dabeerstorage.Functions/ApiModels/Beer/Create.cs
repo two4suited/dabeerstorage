@@ -15,7 +15,18 @@ namespace DaBeerStorage.Functions.ApiModels.Beer
         public int Quantity { get; set; }
         public string UserName { get; set; }
         public DateTimeOffset CreateDate { get; set; }
-        
+        public string BeerId { get; set; }
+        public string UntappedId { get; set; }
+        public string AlchoholByVolume { get; set; }
+        public string Description { get; set; }
+        public string LabelPath { get; set; }
+        public string Style { get; set; }
+        public string Ibu { get; set; }
+        public string BrewerDbId { get; set; }
+        public string Rating { get; set; }
+        public string Location { get; set; }
+        public string BreweryName { get; set; }
+        public string BreweryState { get; set; }
         public string BeerName { get; set; }
 
         public static Models.Beer MapFromCreate(Create create)
@@ -31,6 +42,7 @@ namespace DaBeerStorage.Functions.ApiModels.Beer
         {
             if(string.IsNullOrEmpty(UserName)) AddErrorListString(nameof(UserName));
             if(string.IsNullOrEmpty(BeerName)) AddErrorListString(nameof(BeerName));
+            if(string.IsNullOrEmpty(Description)) AddErrorListString(nameof(Description));
             if(Quantity <= 0) ErrorList.Add("Quantity must be greater than 0");    
             if(CreateDate == DateTimeOffset.MinValue) ErrorList.Add("CreateDate can't be default value");
         }

@@ -28,11 +28,16 @@ namespace DaBeerStorage.Tests.Data
         [Theory,AutoData]
         public void ShouldCallSaveAsync_WhenSaveBeer(string pk,Beer beer)
         {
-            _context.Setup(x => x.SaveAsync(It.IsAny<DaBeerStorageTable>(), new CancellationToken()));
             _rut.SaveBeer(pk, beer);
             
             _context.Verify(x => x.SaveAsync(It.IsAny<DaBeerStorageTable>(),It.IsAny<CancellationToken>()),Times.Once());
-            
+        }
+
+        [Theory, AutoData]
+        public void ShouldCallSaveAsync_WhenAddLocation(string pk,Location location)
+        {
+            _rut.AddLocation(pk, location);
+            _context.Verify(x => x.SaveAsync(It.IsAny<DaBeerStorageTable>(),It.IsAny<CancellationToken>()),Times.Once());
         }
         
     }

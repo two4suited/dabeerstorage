@@ -35,7 +35,7 @@ namespace DaBeerStorage.Tests.Data
         }
 
         [Theory, AutoData]
-        public void ShouldMapFields_WhenMapFromTable(DaBeerStorageTable table)
+        public void ShouldMapFields_WhenMapBeerFromTable(DaBeerStorageTable table)
         {
             table.DateAdded = DateTimeOffset.Now.ToString();
             
@@ -58,6 +58,25 @@ namespace DaBeerStorage.Tests.Data
             beer.UntappedId.ShouldBe(table.UntappedId);
             beer.AlchoholByVolume.ShouldBe(table.AlchoholByVolume);
             beer.BrewerDbId.ShouldBe(table.BrewerDbId);
+        }
+
+        [Theory,AutoData]
+        public void ShouldMapFields_WhenMapLocationFromTable(DaBeerStorageTable table)
+        {
+            var location = DaBeerStorageTable.MapToLocationFromTable(table);
+            
+            location.Name.ShouldBe(table.LocationName);
+        }
+
+        [Theory, AutoData]
+        public void ShouldMapFields_WhenMapFromLocation(Location location,string pk)
+        {
+            var table = DaBeerStorageTable.MapFromLocation(location,pk);
+            
+            table.PK.ShouldBe(pk);
+            table.SK.ShouldBe($"Location#{location.Name}");
+            table.LocationName.ShouldBe(location.Name);
+            
         }
     }
 }

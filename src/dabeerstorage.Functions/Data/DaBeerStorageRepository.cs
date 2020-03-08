@@ -24,9 +24,7 @@ namespace DaBeerStorage.Functions.Data
 
         public async Task<Location> AddLocation(string pk,Location location)
         {
-            var table = _dynamoMapper.Map<DaBeerStorageTable>(location);
-            table.PK = pk;
-            table.SK = "Location#" + location.Name;
+            var table = DaBeerStorageTable.MapFromLocation(location,pk);
             
             await _context.SaveAsync(table);
             return location;

@@ -1,3 +1,5 @@
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DataModel;
 using DaBeerStorage.Functions.Config;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +30,10 @@ namespace DaBeerStorage.Functions
             host.ConfigureServices((c, s) =>
             {
                 s.Configure<AppConfig>(c.Configuration);
+                
+                s.AddDefaultAWSOptions(c.Configuration.GetAWSOptions());
+                s.AddAWSService<IAmazonDynamoDB>();
+                s.AddTransient<IDynamoDBContext, DynamoDBContext>();
 
                 s.AddLogging(x =>
                 {

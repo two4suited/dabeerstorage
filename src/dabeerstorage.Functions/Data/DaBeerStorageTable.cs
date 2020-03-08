@@ -82,5 +82,24 @@ namespace DaBeerStorage.Functions.Data
                 BrewerDbId = table.BrewerDbId
             };
         }
+
+        public static Location MapToLocationFromTable(DaBeerStorageTable table)
+        {
+            return new Location()
+            {
+                Name = table.LocationName
+            };
+        }
+
+        public static DaBeerStorageTable MapFromLocation(Location location,string pk)
+        {
+            return new DaBeerStorageTable()
+            {
+                PK = pk,
+                SK = $"Location#{location.Name}",
+                LocationName = location.Name
+
+            };
+        }
     }
 }

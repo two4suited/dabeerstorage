@@ -1,6 +1,4 @@
-using System.Threading.Tasks;
 using AutoFixture.Xunit2;
-using AutoMapper;
 using DaBeerStorage.Functions.ApiModels.Beer;
 using DaBeerStorage.Functions.Interfaces;
 using DaBeerStorage.Functions.Models;

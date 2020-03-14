@@ -1,12 +1,8 @@
 using System.Threading;
-using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using AutoFixture.Xunit2;
-using AutoMapper;
 using DaBeerStorage.Functions.Data;
-using DaBeerStorage.Functions.Interfaces;
 using DaBeerStorage.Functions.Models;
-using DaBeerStorage.Functions.Services;
 using Moq;
 using Xunit;
 
@@ -15,14 +11,12 @@ namespace DaBeerStorage.Tests.Data
     public class DaBeerStorageRepositoryTest
     {
         private DaBeerStorageRepository _rut;
-        private Mock<IMapper> _map;
         private Mock<IDynamoDBContext> _context;
         public DaBeerStorageRepositoryTest()
         {
             _context = new Mock<IDynamoDBContext>();
-            _map = new Mock<IMapper>();
 
-            _rut = new DaBeerStorageRepository(_context.Object,_map.Object);
+            _rut = new DaBeerStorageRepository(_context.Object);
         }
         
         [Theory,AutoData]

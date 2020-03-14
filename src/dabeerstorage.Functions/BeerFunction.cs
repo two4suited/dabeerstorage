@@ -1,8 +1,6 @@
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
-using DaBeerStorage.Functions.ApiModels.Beer;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 

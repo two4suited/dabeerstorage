@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
 using DaBeerStorage.Functions.ApiModels.Beer;
 using DaBeerStorage.Functions.Interfaces;
-using DaBeerStorage.Functions.Models;
 
 namespace DaBeerStorage.Functions.Services
 {

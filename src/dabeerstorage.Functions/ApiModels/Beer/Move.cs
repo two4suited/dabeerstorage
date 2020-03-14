@@ -1,5 +1,3 @@
-using Microsoft.Extensions.Hosting.Internal;
-
 namespace DaBeerStorage.Functions.ApiModels.Beer
 {
     public class Move

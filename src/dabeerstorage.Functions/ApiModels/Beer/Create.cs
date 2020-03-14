@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Security.Principal;
-using DaBeerStorage.Functions.ApiModels.Location;
 
 namespace DaBeerStorage.Functions.ApiModels.Beer
 {

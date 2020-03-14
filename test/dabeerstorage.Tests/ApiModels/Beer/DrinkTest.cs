@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using DaBeerStorage.Functions.ApiModels.Beer;
 using DaBeerStorage.Functions.Validators.ApiModels.Beer;
 using FluentValidation.TestHelper;

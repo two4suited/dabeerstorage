@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.DocumentModel;
-using AutoMapper;
 using DaBeerStorage.Functions.Interfaces;
 using DaBeerStorage.Functions.Models;
 
@@ -13,12 +10,11 @@ namespace DaBeerStorage.Functions.Data
 {
     public class DaBeerStorageRepository : IDaBeerStorageRepository
     {
-        private readonly IMapper _dynamoMapper;
+      
         private readonly IDynamoDBContext _context;
 
-        public DaBeerStorageRepository(IDynamoDBContext context, IMapper dynamoMapper)
+        public DaBeerStorageRepository(IDynamoDBContext context)
         {
-            _dynamoMapper = dynamoMapper;
             _context = context;
         }
 
@@ -34,7 +30,7 @@ namespace DaBeerStorage.Functions.Data
         {
             string[] filter = { "Location" };
             var items = await _context.QueryAsync<DaBeerStorageTable>(pk,QueryOperator.BeginsWith,filter).GetRemainingAsync();
-            var locations = _dynamoMapper.Map<List<DaBeerStorageTable>, List<Location>>(items);
+            List<Location> locations = null;//_dynamoMapper.Map<List<DaBeerStorageTable>, List<Location>>(items);
 
             return locations;
         }
@@ -60,9 +56,9 @@ namespace DaBeerStorage.Functions.Data
         {
             string[] filter = { "Beer" };
             var items = await _context.QueryAsync<DaBeerStorageTable>(pk, QueryOperator.BeginsWith, filter).GetRemainingAsync();
-            var beers = _dynamoMapper.Map<List<DaBeerStorageTable>, List<Beer>>(items);
+            //var beers = _dynamoMapper.Map<List<DaBeerStorageTable>, List<Beer>>(items);
 
-            var beer = _dynamoMapper.Map<Beer>(beers.First(x => x.BeerId == id));
+            Beer beer = null;//_dynamoMapper.Map<Beer>(beers.First(x => x.BeerId == id));
 
             return beer;  
         }
@@ -76,7 +72,7 @@ namespace DaBeerStorage.Functions.Data
             conditions.Add(new ScanCondition("SK", ScanOperator.BeginsWith, "Beer#"));
             var items = await _context.ScanAsync<DaBeerStorageTable>(conditions).GetRemainingAsync();
 
-            var beers = _dynamoMapper.Map<List<DaBeerStorageTable>, List<Beer>>(items);
+            List<Beer> beers = null;//_dynamoMapper.Map<List<DaBeerStorageTable>, List<Beer>>(items);
 
             return beers;
         }
@@ -92,7 +88,7 @@ namespace DaBeerStorage.Functions.Data
             conditions.Add(new ScanCondition(key, ScanOperator.NotEqual, value));
             var items = await _context.ScanAsync<DaBeerStorageTable>(conditions).GetRemainingAsync();
 
-            var beers = _dynamoMapper.Map<List<DaBeerStorageTable>, List<Beer>>(items);
+            List<Beer> beers = null;//_dynamoMapper.Map<List<DaBeerStorageTable>, List<Beer>>(items);
 
             return beers;
         }

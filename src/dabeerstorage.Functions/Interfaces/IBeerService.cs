@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using DaBeerStorage.Functions.ApiModels.Beer;
-using DaBeerStorage.Functions.Models;
 
 namespace DaBeerStorage.Functions.Interfaces
 {

@@ -37,14 +37,16 @@ namespace DaBeerStorage.Functions.Services
         public async Task<ListNotDrank> ListNotDrank(ListNotDrank listNotDrank)
         {
             var beersFromRepo = await _daBeerStorageRepository.ListNotDrank(listNotDrank.UserName);
-            listNotDrank.Beers = beersFromRepo;
+            //listNotDrank.Beers = beersFromRepo;
                 
             return listNotDrank;
         }
 
         public async Task Move(Move move)
         {
-            await _daBeerStorageRepository.SaveBeer(move.UserName, move.Beer);
+            var beer = await _daBeerStorageRepository.GetBeer(move.UserName, move.BeerId);
+            beer.Location = move.NewLocation;
+            await _daBeerStorageRepository.SaveBeer(move.UserName, beer);
         }
     }
 }

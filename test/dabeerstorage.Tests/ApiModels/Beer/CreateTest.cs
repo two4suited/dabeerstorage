@@ -1,6 +1,8 @@
 using System;
 using AutoFixture.Xunit2;
 using DaBeerStorage.Functions.ApiModels.Beer;
+using DaBeerStorage.Functions.Validators.ApiModels.Beer;
+using FluentValidation.TestHelper;
 using Shouldly;
 using Xunit;
 
@@ -8,136 +10,190 @@ namespace DaBeerStorage.Tests.ApiModels.Beer
 {
     public class CreateTest 
     {
-        private Create create;
+        private Create _create;
+        private readonly CreateValidator _validator;
         public CreateTest()
         {
-            create = new Create()
+            _create = new Create()
             {
                 BeerName = "Test",
                 UserName = "Test",
                 Description = "Test",
-                Ibu = "145"
+                Ibu = "145",
+                Location = "Test",
+                Style = "T",
+                BeerId = "1",
+                BreweryName = "T",
+                BreweryState = "OR",
+                LabelPath = "Test",
+                UntappedId = "1",
+                AlcoholByVolume = "5"
             };
+            _validator = new CreateValidator();
         }
+        
+        
         [Fact]
-        public void Valid_ShouldBe_False_When_UserName_Is_Null()
+        public void ShouldHaveValidationError_When_UserName_Is_Null()
         {
-            create.UserName = null;
-            create.Validate();
-            create.Valid.ShouldBeFalse();
-        }
-
-        [Fact]
-        public void Valid_ShouldBe_False_When_UserName_Is_EmptyString()
-        {
-            create.UserName = "";
-            create.Validate();
-            create.Valid.ShouldBeFalse();
+            _validator.ShouldHaveValidationErrorFor(c => c.UserName, null as string);
         }
 
         [Fact]
-        public void Valid_ShouldBe_True_When_Description_Has_Value()
+        public void ShouldHaveValidationError_When_UserName_Is_EmptyString()
         {
-            create.Validate();
-            create.Valid.ShouldBeTrue();
+            _validator.ShouldHaveValidationErrorFor(c => c.UserName, "");
         }
         
         [Fact]
-        public void Valid_ShouldBe_False_When_Description_Is_Null()
+        public void ShouldHaveValidationError_When_Description_Is_Null()
         {
-            create.Description = null;
-            create.Validate();
-            create.Valid.ShouldBeFalse();
+            _validator.ShouldHaveValidationErrorFor(c => c.Description, "");
         }
 
         [Fact]
-        public void Valid_ShouldBe_False_When_Description_Is_EmptyString()
+        public void ShouldHaveValidationError_When_Description_Is_EmptyString()
         {
-            create.Description = "";
-            create.Validate();
-            create.Valid.ShouldBeFalse();
+            _validator.ShouldHaveValidationErrorFor(c => c.Description, null as string);
         }
 
         [Fact]
-        public void Valid_ShouldBe_True_When_UserName_Has_Value()
+        public void ShouldHaveValidationError_When_BeerName_IsNull()
         {
-            create.Validate();
-            create.Valid.ShouldBeTrue();
+            _validator.ShouldHaveValidationErrorFor(c => c.BeerName, null as string);
         }
 
         [Fact]
-        public void Valid_ShouldBe_False_When_BeerName_IsNull()
+        public void ShouldHaveValidationError_When_BeerName_Is_EmptyString()
         {
-            create.BeerName = null;
-            create.Validate();
-            create.Valid.ShouldBeFalse();
+            _validator.ShouldHaveValidationErrorFor(c => c.BeerName, "");
         }
 
         [Fact]
-        public void Valid_ShouldBe_False_When_BeerName_Is_EmptyString()
+        public void ShouldHaveValidationError_When_Ibu_IsNull()
         {
-            create.BeerName = "";
-            create.Validate();
-            create.Valid.ShouldBeFalse();
+            _validator.ShouldHaveValidationErrorFor(c => c.Ibu, null as string);
         }
+
         [Fact]
-        public void Valid_ShouldBe_True_When_BeerName_Has_Value()
+        public void ShouldHaveValidationError_When_Ibu_Is_EmptyString()
         {
-            create.Validate();
-            create.Valid.ShouldBeTrue();
+            _validator.ShouldHaveValidationErrorFor(c => c.Ibu, "");
+        }
+      
+        [Fact]
+        public void ShouldHaveValidationError_When_Quantity_Is_Zero()
+        {
+            _validator.ShouldHaveValidationErrorFor(c => c.Quantity, 0);
         }
         
         [Fact]
-        public void Valid_ShouldBe_False_When_Ibu_IsNull()
+        public void ShouldHaveValidationError_When_Quantity_Is_Negative()
         {
-            create.Ibu = null;
-            create.Validate();
-            create.Valid.ShouldBeFalse();
+            _validator.ShouldHaveValidationErrorFor(c => c.Quantity, -1);
+        }
+        [Theory,AutoData]
+        public void IsValid_ShouldBe_True_When_Quantity_Is_Positive(Create c)
+        {
+            c.Quantity = 1;
+            _validator.Validate(c).IsValid.ShouldBeTrue();
         }
 
         [Fact]
-        public void Valid_ShouldBe_False_When_Ibu_Is_EmptyString()
+        public void ShouldHaveValidationError_When_CreateDate_Is_Min()
         {
-            create.Ibu = "";
-            create.Validate();
-            create.Valid.ShouldBeFalse();
+            _validator.ShouldHaveValidationErrorFor(c => c.CreateDate, DateTimeOffset.MinValue);
         }
         [Fact]
-        public void Valid_ShouldBe_True_When_Ibu_Has_Value()
+        public void ShouldHaveValidationError_When_BeerId_IsNull()
         {
-            create.Validate();
-            create.Valid.ShouldBeTrue();
+            _validator.ShouldHaveValidationErrorFor(c => c.BeerId, null as string);
         }
 
         [Fact]
-        public void Valid_ShouldBe_False_When_Quantity_Is_Zero()
+        public void ShouldHaveValidationError_When_BeerId_Is_EmptyString()
         {
-            create.Quantity = 0;
-            create.Validate();
-            create.Valid.ShouldBeFalse();
+            _validator.ShouldHaveValidationErrorFor(c => c.BeerId, "");
         }
-        
+       
         [Fact]
-        public void Valid_ShouldBe_False_When_Quantity_Is_Negative()
+        public void ShouldHaveValidationError_When_UntappdId_IsNull()
         {
-            create.Quantity = -1;
-            create.Validate();
-            create.Valid.ShouldBeFalse();
-        }
-        [Fact]
-        public void Valid_ShouldBe_True_When_Quantity_Is_Positve()
-        {
-            create.Quantity = 1;
-            create.Validate();
-            create.Valid.ShouldBeTrue();
+            _validator.ShouldHaveValidationErrorFor(c => c.UntappedId, null as string);
         }
 
         [Fact]
-        public void Valid_ShouldBe_False_When_CreateDate_Is_Min()
+        public void ShouldHaveValidationError_When_UntappdId_Is_EmptyString()
         {
-            create.CreateDate=DateTimeOffset.MinValue;
-            create.Validate();
-            create.Valid.ShouldBeFalse();
+            _validator.ShouldHaveValidationErrorFor(c => c.UntappedId, "");
         }
+        [Fact]
+        public void ShouldHaveValidationError_When_AlcoholByVolume_IsNull()
+        {
+            _validator.ShouldHaveValidationErrorFor(c => c.AlcoholByVolume, null as string);
+        }
+
+        [Fact]
+        public void ShouldHaveValidationError_When_AlcoholByVolume_Is_EmptyString()
+        {
+            _validator.ShouldHaveValidationErrorFor(c => c.AlcoholByVolume, "");
+        }
+        [Fact]
+        public void ShouldHaveValidationError_When_Location_IsNull()
+        {
+            _validator.ShouldHaveValidationErrorFor(c => c.Location, null as string);
+        }
+
+        [Fact]
+        public void ShouldHaveValidationError_When_Location_Is_EmptyString()
+        {
+            _validator.ShouldHaveValidationErrorFor(c => c.Location, "");
+        }
+       
+        [Fact]
+        public void ShouldHaveValidationError_When_BreweryName_IsNull()
+        {
+            _validator.ShouldHaveValidationErrorFor(c => c.BreweryName, null as string);
+        }
+
+        [Fact]
+        public void ShouldHaveValidationError_When_BreweryName_Is_EmptyString()
+        {
+            _validator.ShouldHaveValidationErrorFor(c => c.BreweryName, "");
+        }
+        [Fact]
+        public void ShouldHaveValidationError_When_BreweryState_IsNull()
+        {
+            _validator.ShouldHaveValidationErrorFor(c => c.BreweryState, null as string);
+        }
+
+        [Fact]
+        public void ShouldHaveValidationError_When_BreweryState_Is_EmptyString()
+        {
+            _validator.ShouldHaveValidationErrorFor(c => c.BreweryState, "");
+        }
+        [Fact]
+        public void ShouldHaveValidationError_False_When_LabelPath_IsNull()
+        {
+            _validator.ShouldHaveValidationErrorFor(c => c.LabelPath, null as string);
+        }
+
+        [Fact]
+        public void ShouldHaveValidationError_When_LabelPath_Is_EmptyString()
+        {
+            _validator.ShouldHaveValidationErrorFor(c => c.LabelPath, "");
+        }
+        [Fact]
+        public void ShouldHaveValidationError_When_Style_IsNull()
+        {
+            _validator.ShouldHaveValidationErrorFor(c => c.Style, null as string);
+        }
+
+        [Fact]
+        public void ShouldHaveValidationError_When_Style_Is_EmptyString()
+        {
+            _validator.ShouldHaveValidationErrorFor(c => c.Style, "");
+        }
+      
     }
 }

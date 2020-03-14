@@ -1,16 +1,18 @@
+using System.Collections.Generic;
 using DaBeerStorage.Functions.ApiModels.Search;
 using DaBeerStorage.Functions.Interfaces;
+using DaBeerStorage.Functions.ViewModels;
 
 namespace DaBeerStorage.Functions.Services
 {
     public class SearchService : ISearchService
     {
-        public BeerList SearchByName(ByName name)
+        public  List<SearchViewModel>  SearchByName(ByName name)
         {
             throw new System.NotImplementedException();
         }
 
-        public BeerList SearchById(ById id)
+        public  List<SearchViewModel>  SearchById(ById id)
         {
             throw new System.NotImplementedException();
         }

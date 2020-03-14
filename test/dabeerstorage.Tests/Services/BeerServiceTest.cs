@@ -6,6 +6,7 @@ using DaBeerStorage.Functions.Interfaces;
 using DaBeerStorage.Functions.Models;
 using DaBeerStorage.Functions.Services;
 using Moq;
+using Shouldly;
 using Xunit;
 
 namespace DaBeerStorage.Tests.Services
@@ -50,10 +51,23 @@ namespace DaBeerStorage.Tests.Services
         }
 
         [Theory,AutoData]
-        public void Move_ShouldCallUpdateBeer(Move move)
+        public void Move_Should_Call_GetAndUpdate(Move move,Beer beer)
         {
+            _storage.Setup(m => m.GetBeer(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(beer);            
+            
             _sut.Move(move);
-            _storage.Verify(x => x.SaveBeer(It.IsAny<string>(),It.IsAny<Beer>()));
+            _storage.Verify(m => m.GetBeer(It.IsAny<string>(),It.IsAny<string>()),Times.Once);
+            _storage.Verify(m => m.SaveBeer(It.IsAny<string>(),It.IsAny<Beer>()),Times.Once);
+        }
+        
+        [Theory,AutoData]
+        public void Move_ShouldSetNewLocation(Move move,Beer beer)
+        {
+            _storage.Setup(m => m.GetBeer(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(beer);
+            
+            _sut.Move(move);
+            
+            beer.Location.ShouldBe(move.NewLocation);
         }
     }
 }

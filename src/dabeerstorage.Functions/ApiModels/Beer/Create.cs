@@ -5,7 +5,7 @@ using DaBeerStorage.Functions.ApiModels.Location;
 
 namespace DaBeerStorage.Functions.ApiModels.Beer
 {
-    public class Create : ValidateApiModels
+    public class Create 
     {
         public Create()
         {
@@ -17,7 +17,7 @@ namespace DaBeerStorage.Functions.ApiModels.Beer
         public DateTimeOffset CreateDate { get; set; }
         public string BeerId { get; set; }
         public string UntappedId { get; set; }
-        public string AlchoholByVolume { get; set; } 
+        public string AlcoholByVolume { get; set; } 
         public string Description { get; set; }
         public string LabelPath { get; set; }
         public string Style { get; set; }
@@ -35,21 +35,7 @@ namespace DaBeerStorage.Functions.ApiModels.Beer
                 DateAdded = create.CreateDate
             };
         }
-
-        public override void Validate()
-        {
-            if(string.IsNullOrEmpty(UserName)) AddErrorListString(nameof(UserName));
-            if(string.IsNullOrEmpty(BeerName)) AddErrorListString(nameof(BeerName));
-            if(string.IsNullOrEmpty(Description)) AddErrorListString(nameof(Description));
-            if(string.IsNullOrEmpty(Ibu)) AddErrorListString(nameof(Ibu));
-            if(Quantity <= 0) ErrorList.Add("Quantity must be greater than 0");    
-            if(CreateDate == DateTimeOffset.MinValue) ErrorList.Add("CreateDate can't be default value");
-        }
-
-        private void AddErrorListString(string propertyName)
-        {
-            ErrorList.Add($"{propertyName} can't be blank or null");
-        }
+        
         
         
     }

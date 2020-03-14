@@ -11,7 +11,7 @@ using Xunit;
 
             beer.Drink();
 
-            beer.Drank.Value.ShouldBeTrue();
+            (beer.Drank != null && beer.Drank.Value).ShouldBeTrue();
         }
 
         [Fact]

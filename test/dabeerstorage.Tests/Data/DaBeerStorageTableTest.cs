@@ -2,13 +2,15 @@ using System;
 using AutoFixture.Xunit2;
 using DaBeerStorage.Functions.Data;
 using DaBeerStorage.Functions.Models;
+using DaBeerStorage.Tests.ViewModels;
 using Shouldly;
 using Xunit;
 
 namespace DaBeerStorage.Tests.Data
 {
-    public class DaBeerStorageTableTest
+    public class DaBeerStorageTableTest : BaseMappingTest
     {
+        [Trait("Category","Mapping")]
         [Theory, AutoData]
         public void ShouldMapField_WhenMapFromBeer(string pk,Beer beer)
         {
@@ -33,13 +35,27 @@ namespace DaBeerStorage.Tests.Data
             table.AlchoholByVolume.ShouldBe(beer.AlchoholByVolume);
             table.BrewerDbId.ShouldBe(beer.BrewerDbId);
         }
+        
+        [Trait("Category","Mapping")]
+        [Theory,AutoData]
+        public void All_Beer_Properties_Should_Have_A_Value(DaBeerStorageTable table)
+        {
+            table.DrankWhen = DateTimeOffset.Now.ToString();
+            table.DateAdded = DateTimeOffset.Now.ToString();
+            
+            var beer = table.MapToBeer();
 
+            VerifyMappings(beer);
+        }
+        
+        
+        [Trait("Category","Mapping")]
         [Theory, AutoData]
         public void ShouldMapFields_WhenMapBeerFromTable(DaBeerStorageTable table)
         {
             table.DateAdded = DateTimeOffset.Now.ToString();
-            
-            var beer = DaBeerStorageTable.MapFromTable(table);
+
+            var beer = table.MapToBeer();
             
             beer.Description.ShouldBe(table.BeerDescription);
             beer.Drank.ShouldBe(table.Drank);
@@ -59,15 +75,25 @@ namespace DaBeerStorage.Tests.Data
             beer.AlchoholByVolume.ShouldBe(table.AlchoholByVolume);
             beer.BrewerDbId.ShouldBe(table.BrewerDbId);
         }
-
+        [Trait("Category","Mapping")]
         [Theory,AutoData]
         public void ShouldMapFields_WhenMapLocationFromTable(DaBeerStorageTable table)
         {
-            var location = DaBeerStorageTable.MapToLocationFromTable(table);
+            var location = table.MapToLocation();
             
             location.Name.ShouldBe(table.LocationName);
         }
+        
+        [Trait("Category","Mapping")]
+        [Theory,AutoData]
+        public void All_Location_Properties_Should_Have_A_Value(DaBeerStorageTable table)
+        {
+            var location = table.MapToLocation();
 
+            VerifyMappings(location);
+        }
+        
+        [Trait("Category","Mapping")]
         [Theory, AutoData]
         public void ShouldMapFields_WhenMapFromLocation(Location location,string pk)
         {
@@ -76,7 +102,8 @@ namespace DaBeerStorage.Tests.Data
             table.PK.ShouldBe(pk);
             table.SK.ShouldBe($"Location#{location.Name}");
             table.LocationName.ShouldBe(location.Name);
-            
         }
+        
+        
     }
 }

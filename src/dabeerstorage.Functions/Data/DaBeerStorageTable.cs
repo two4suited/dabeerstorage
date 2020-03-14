@@ -60,34 +60,34 @@ namespace DaBeerStorage.Functions.Data
             };
         }
 
-        public static Beer MapFromTable(DaBeerStorageTable table)
+        public Beer MapToBeer()
         {
             return new Beer()
             {
-                Description = table.BeerDescription,
-                Drank = table.Drank,
-                Ibu = table.Ibu,
-                Location = table.LocationName,
-                Name = table.BeerName,
-                Rating = table.Rating,
-                Style = table.Style,
-                BeerId = table.BeerId,
-                BreweryName = table.BreweryName,
-                BreweryState = table.BreweryState,
-                DateAdded = DateTimeOffset.Parse(table.DateAdded),
-                DrankWhen = table.DrankWhen,
-                LabelPath = table.LabelPath,
-                UntappedId = table.UntappedId,
-                AlchoholByVolume = table.AlchoholByVolume,
-                BrewerDbId = table.BrewerDbId
+                Description = BeerDescription,
+                Drank =Drank,
+                Ibu = Ibu,
+                Location = LocationName,
+                Name = BeerName,
+                Rating = Rating,
+                Style =Style,
+                BeerId = BeerId,
+                BreweryName = BreweryName,
+                BreweryState = BreweryState,
+                DateAdded = DateTimeOffset.Parse(DateAdded),
+                DrankWhen = DrankWhen,
+                LabelPath = LabelPath,
+                UntappedId = UntappedId,
+                AlchoholByVolume = AlchoholByVolume,
+                BrewerDbId = BrewerDbId
             };
         }
 
-        public static Location MapToLocationFromTable(DaBeerStorageTable table)
+        public Location MapToLocation()
         {
             return new Location()
             {
-                Name = table.LocationName
+                Name = LocationName
             };
         }
 

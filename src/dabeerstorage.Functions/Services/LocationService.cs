@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DaBeerStorage.Functions.ApiModels.Location;
 using DaBeerStorage.Functions.Interfaces;
 using DaBeerStorage.Functions.Models;
+using DaBeerStorage.Functions.ViewModels;
 
 namespace DaBeerStorage.Functions.Services
 {
@@ -21,7 +22,7 @@ namespace DaBeerStorage.Functions.Services
             return newLocation.ToCoreModel();
         }
 
-        public Task<List<ListLocation>> List()
+        public Task<List<LocationViewModel>> List(ListLocation listLocation)
         {
             throw new System.NotImplementedException();
         }

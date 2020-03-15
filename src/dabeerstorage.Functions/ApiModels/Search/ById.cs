@@ -6,6 +6,5 @@ namespace DaBeerStorage.Functions.ApiModels.Search
     public class ById 
     {
         public string Id { get; set; }
-        public List<SearchViewModel> SearchResults { get; set; }
     }
 }

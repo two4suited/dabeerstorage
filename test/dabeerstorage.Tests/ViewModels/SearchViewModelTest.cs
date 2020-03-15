@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AutoFixture.Xunit2;
 using DaBeerStorage.Functions.Models;
 using DaBeerStorage.Functions.ViewModels;
@@ -28,6 +29,14 @@ namespace DaBeerStorage.Tests.ViewModels
             viewModel.Ibu.ShouldBe(beer.Ibu);
             viewModel.BreweryState.ShouldBe(beer.BreweryState);
             viewModel.Rating.ShouldBe(beer.Rating);
+        }
+        
+        [Theory, AutoData]
+        public void Should_MatchCount_WhenMapping_From_List(List<Beer> beers)
+        {
+            var viewModels = SearchViewModel.FromCoreModels(beers);
+            
+            beers.Count.ShouldBe(viewModels.Count);
         }
     }
 }

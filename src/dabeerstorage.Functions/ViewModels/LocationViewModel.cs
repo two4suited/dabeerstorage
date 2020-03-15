@@ -1,10 +1,13 @@
+using System.Collections.Generic;
 using DaBeerStorage.Functions.Models;
+using FluentValidation.Resources;
 
 namespace DaBeerStorage.Functions.ViewModels
 {
     public class LocationViewModel
     {
         public string Name { get; set; }
+
         public static LocationViewModel FromCoreModel(Location location)
         {
             return new LocationViewModel()
@@ -12,5 +15,11 @@ namespace DaBeerStorage.Functions.ViewModels
                 Name = location.Name
             };
         }
-    }
+
+        public static List<LocationViewModel> FromCoreModels(List<Location> locations)
+        {
+            return null;
+        }
+    
+}
 }

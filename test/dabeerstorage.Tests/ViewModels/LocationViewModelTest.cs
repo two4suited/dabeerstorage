@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AutoFixture.Xunit2;
 using DaBeerStorage.Functions.Models;
 using DaBeerStorage.Functions.ViewModels;
@@ -22,6 +23,14 @@ namespace DaBeerStorage.Tests.ViewModels
         {
             var viewModel = LocationViewModel.FromCoreModel(location);
             viewModel.Name.ShouldBe(location.Name);
+        }
+
+        [Theory, AutoData]
+        public void Should_MatchCount_WhenMapping_From_List(List<Location> locations)
+        {
+            var viewModels = LocationViewModel.FromCoreModels(locations);
+            
+            locations.Count.ShouldBe(viewModels.Count);
         }
     }
 }

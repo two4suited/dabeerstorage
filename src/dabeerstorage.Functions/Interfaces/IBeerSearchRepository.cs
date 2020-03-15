@@ -8,6 +8,6 @@ namespace DaBeerStorage.Functions.Interfaces
     public interface IBeerSearchRepository
     {
         Task<IList<Item>> SearchByName(int page,string searchString);
-        Task<Beer> SearchById(int beerId);
+        Task<Beer> SearchById(string beerId);
     }
 }

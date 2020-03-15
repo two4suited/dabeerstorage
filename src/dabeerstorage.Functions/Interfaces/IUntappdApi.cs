@@ -12,7 +12,7 @@ namespace DaBeerStorage.Functions.Interfaces
 
         [Get("/beer/info/{bid}?client_id={clientid}&client_secret={clientsecret}&compact=true")]
         Task<Beer> GetBeerById([AliasAs("clientid")] string clientId, [AliasAs("clientsecret")] string clientSecret,
-            [AliasAs("bid")] int beerId);
+            [AliasAs("bid")] string beerId);
 
     }
 }

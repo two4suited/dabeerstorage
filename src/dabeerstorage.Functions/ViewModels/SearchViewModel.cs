@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DaBeerStorage.Functions.Models;
 
 namespace DaBeerStorage.Functions.ViewModels
@@ -23,6 +24,11 @@ namespace DaBeerStorage.Functions.ViewModels
                 Rating = beer.Rating,
                 BreweryState = beer.BreweryState
             };
+        }
+
+        public static List<SearchViewModel> FromCoreModels(List<Beer> beers)
+        {
+            return null;
         }
     }
 }

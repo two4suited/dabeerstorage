@@ -26,7 +26,7 @@ namespace DaBeerStorage.Functions.Untappd
 
         }
 
-        public async Task<Beer> SearchById(int beerId)
+        public async Task<Beer> SearchById(string beerId)
         {
             var response = await _client.GetBeerById(_options.ClientId, _options.ClientKey, beerId);
             return response;

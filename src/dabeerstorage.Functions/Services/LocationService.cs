@@ -22,9 +22,10 @@ namespace DaBeerStorage.Functions.Services
             return newLocation.ToCoreModel();
         }
 
-        public Task<List<LocationViewModel>> List(ListLocation listLocation)
+        public async Task<List<LocationViewModel>> List(ListLocation listLocation)
         {
-            throw new System.NotImplementedException();
+           var locations =  await _repository.ListLocation(listLocation.UserName);
+           return LocationViewModel.FromCoreModels(locations);
         }
     }
 }

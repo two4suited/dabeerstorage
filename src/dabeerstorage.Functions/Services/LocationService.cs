@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using DaBeerStorage.Functions.ApiModels.Location;
 using DaBeerStorage.Functions.Interfaces;
 using DaBeerStorage.Functions.Models;
@@ -11,13 +13,15 @@ namespace DaBeerStorage.Functions.Services
         public LocationService(IDaBeerStorageRepository repository)
         {
             _repository = repository;
+            
         }
-        public Location Add(Add newLocation)
+        public async Task<Location> Add(Add newLocation)
         {
-            throw new System.NotImplementedException();
+            await _repository.AddLocation(newLocation.UserName, newLocation.ToCoreModel());
+            return newLocation.ToCoreModel();
         }
 
-        public ListLocation List()
+        public Task<List<ListLocation>> List()
         {
             throw new System.NotImplementedException();
         }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DaBeerStorage.Functions.ApiModels.Search;
 using DaBeerStorage.Functions.Interfaces;
 using DaBeerStorage.Functions.ViewModels;
@@ -13,14 +14,16 @@ namespace DaBeerStorage.Functions.Services
         {
             _repository = repository;
         }
-        public  List<SearchViewModel>  SearchByName(ByName name)
+        public async  Task<List<SearchViewModel>>  SearchByName(ByName byName)
         {
-            throw new System.NotImplementedException();
+            var results = await _repository.SearchByName(1, byName.SearchValue);
+            return null;
         }
 
-        public  List<SearchViewModel>  SearchById(ById id)
+        public async  Task<List<SearchViewModel>>  SearchById(ById byId)
         {
-            throw new System.NotImplementedException();
+            var results = await _repository.SearchById(byId.Id);
+            return null;
         }
     }
 }

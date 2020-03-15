@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DaBeerStorage.Functions.ApiModels.Beer;
+using DaBeerStorage.Functions.ViewModels;
 
 namespace DaBeerStorage.Functions.Interfaces
 {
@@ -7,7 +9,7 @@ namespace DaBeerStorage.Functions.Interfaces
     {
         Task Drink(Drink drink);
         Task Create(Create newBeer);
-        Task<ListNotDrank> ListNotDrank(ListNotDrank listNotDrank);
+        Task<List<BeerViewModel>> ListNotDrank(ListNotDrank listNotDrank);
         Task Move(Move move);
     }
 }

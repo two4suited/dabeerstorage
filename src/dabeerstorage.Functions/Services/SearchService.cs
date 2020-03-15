@@ -7,6 +7,12 @@ namespace DaBeerStorage.Functions.Services
 {
     public class SearchService : ISearchService
     {
+        private readonly IBeerSearchRepository _repository;
+
+        public SearchService(IBeerSearchRepository repository)
+        {
+            _repository = repository;
+        }
         public  List<SearchViewModel>  SearchByName(ByName name)
         {
             throw new System.NotImplementedException();

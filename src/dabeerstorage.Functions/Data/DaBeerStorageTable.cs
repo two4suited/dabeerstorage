@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Amazon.DynamoDBv2.DataModel;
 using DaBeerStorage.Functions.Models;
 
@@ -83,6 +85,16 @@ namespace DaBeerStorage.Functions.Data
             };
         }
 
+        public static List<Beer> MapToBeers(List<DaBeerStorageTable> rows)
+        {
+            return rows.Select(row => row.MapToBeer()).ToList();
+        }
+
+        public static List<Location> MapToLocations(List<DaBeerStorageTable> rows)
+        {
+            return rows.Select(row => row.MapToLocation()).ToList();
+        }
+        
         public Location MapToLocation()
         {
             return new Location()

@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DaBeerStorage.Functions.ApiModels.Beer;
 using DaBeerStorage.Functions.Interfaces;
+using DaBeerStorage.Functions.ViewModels;
 
 namespace DaBeerStorage.Functions.Services
 {
@@ -31,12 +33,12 @@ namespace DaBeerStorage.Functions.Services
             }
         }
 
-        public async Task<ListNotDrank> ListNotDrank(ListNotDrank listNotDrank)
+        public async Task<List<BeerViewModel>> ListNotDrank(ListNotDrank listNotDrank)
         {
             var beersFromRepo = await _daBeerStorageRepository.ListNotDrank(listNotDrank.UserName);
-            //listNotDrank.Beers = beersFromRepo;
+            
                 
-            return listNotDrank;
+            return BeerViewModel.FromCoreModels(beersFromRepo);
         }
 
         public async Task Move(Move move)

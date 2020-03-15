@@ -6,6 +6,12 @@ namespace DaBeerStorage.Functions.Services
 {
     public class LocationService : ILocationService
     {
+        private readonly IDaBeerStorageRepository _repository;
+
+        public LocationService(IDaBeerStorageRepository repository)
+        {
+            _repository = repository;
+        }
         public Location Add(Add newLocation)
         {
             throw new System.NotImplementedException();

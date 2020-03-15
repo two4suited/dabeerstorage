@@ -30,7 +30,7 @@ namespace DaBeerStorage.Functions.Data
         public bool? Drank { get; set; }
         public string Rating { get; set; }
         public string DrankWhen { get; set; }
-        public string DateAdded { get; set; }
+        public DateTime DateAdded { get; set; }
         public string BreweryName { get; set; }
         public string BreweryState { get; set; }
         [DynamoDBLocalSecondaryIndexRangeKey]
@@ -52,7 +52,7 @@ namespace DaBeerStorage.Functions.Data
                 BeerName = beer.Name,
                 BreweryName = beer.BreweryName,
                 BreweryState = beer.BreweryState,
-                DateAdded = beer.DateAdded.ToString(),
+                DateAdded = beer.DateAdded.ToLocalTime().DateTime,
                 DrankWhen = beer.DrankWhen,
                 LabelPath = beer.LabelPath,
                 LocationName = beer.Location,
@@ -76,7 +76,7 @@ namespace DaBeerStorage.Functions.Data
                 BeerId = BeerId,
                 BreweryName = BreweryName,
                 BreweryState = BreweryState,
-                DateAdded = DateTimeOffset.Parse(DateAdded),
+                DateAdded = DateAdded,
                 DrankWhen = DrankWhen,
                 LabelPath = LabelPath,
                 UntappedId = UntappedId,

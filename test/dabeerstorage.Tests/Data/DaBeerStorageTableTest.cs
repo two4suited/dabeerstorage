@@ -28,7 +28,7 @@ namespace DaBeerStorage.Tests.Data
             table.BeerName.ShouldBe(beer.Name);
             table.BreweryName.ShouldBe(beer.BreweryName);
             table.BreweryState.ShouldBe(beer.BreweryState);
-            table.DateAdded.ShouldBe(beer.DateAdded.ToString());
+            table.DateAdded.ShouldBe(beer.DateAdded.DateTime);
             table.DrankWhen.ShouldBe(beer.DrankWhen);
             table.LabelPath.ShouldBe(beer.LabelPath);
             table.LocationName.ShouldBe(beer.Location);
@@ -42,8 +42,7 @@ namespace DaBeerStorage.Tests.Data
         public void All_Beer_Properties_Should_Have_A_Value(DaBeerStorageTable table)
         {
             table.DrankWhen = DateTimeOffset.Now.ToString();
-            table.DateAdded = DateTimeOffset.Now.ToString();
-            
+
             var beer = table.MapToBeer();
 
             VerifyMappings(beer);
@@ -54,8 +53,6 @@ namespace DaBeerStorage.Tests.Data
         [Theory, AutoData]
         public void ShouldMapFields_WhenMapBeerFromTable(DaBeerStorageTable table)
         {
-            table.DateAdded = DateTimeOffset.Now.ToString();
-
             var beer = table.MapToBeer();
             
             beer.Description.ShouldBe(table.BeerDescription);
@@ -68,7 +65,7 @@ namespace DaBeerStorage.Tests.Data
             beer.BeerId.ShouldBe(table.BeerId);
             beer.BreweryName.ShouldBe(table.BreweryName);
             beer.BreweryState.ShouldBe(table.BreweryState);
-            beer.DateAdded.ShouldBe(DateTimeOffset.Parse(table.DateAdded));
+            beer.DateAdded.ShouldBe(table.DateAdded);
             beer.DrankWhen.ShouldBe(table.DrankWhen);
             beer.LabelPath.ShouldBe(table.LabelPath);
             beer.Location.ShouldBe(table.LocationName);

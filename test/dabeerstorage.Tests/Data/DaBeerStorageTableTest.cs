@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using AutoFixture.Xunit2;
 using DaBeerStorage.Functions.Data;
 using DaBeerStorage.Functions.Models;
@@ -102,6 +103,20 @@ namespace DaBeerStorage.Tests.Data
             table.PK.ShouldBe(pk);
             table.SK.ShouldBe($"Location#{location.Name}");
             table.LocationName.ShouldBe(location.Name);
+        }
+        [Theory, AutoData]
+        public void Locations_Should_MatchCount_WhenMapping_From_List(List<DaBeerStorageTable> locations)
+        {
+            var coreModels = DaBeerStorageTable.MapToLocations(locations);
+            
+            locations.Count.ShouldBe(coreModels.Count);
+        }
+        [Theory, AutoData]
+        public void Beers_Should_MatchCount_WhenMapping_From_List(List<DaBeerStorageTable> beers)
+        {
+            var coreModels = DaBeerStorageTable.MapToBeers(beers);
+            
+            beers.Count.ShouldBe(coreModels.Count);
         }
         
         

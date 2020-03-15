@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DaBeerStorage.Functions.Models;
 using FluentValidation.Resources;
 
@@ -16,9 +17,9 @@ namespace DaBeerStorage.Functions.ViewModels
             };
         }
 
-        public static List<LocationViewModel> FromCoreModels(List<Location> locations)
+        public static List<LocationViewModel> FromCoreModels(List<Location> rows)
         {
-            return null;
+            return rows.Select(LocationViewModel.FromCoreModel).ToList();
         }
     
 }

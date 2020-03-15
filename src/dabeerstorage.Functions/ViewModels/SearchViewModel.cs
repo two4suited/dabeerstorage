@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DaBeerStorage.Functions.Models;
 
 namespace DaBeerStorage.Functions.ViewModels
@@ -26,9 +27,9 @@ namespace DaBeerStorage.Functions.ViewModels
             };
         }
 
-        public static List<SearchViewModel> FromCoreModels(List<Beer> beers)
+        public static List<SearchViewModel> FromCoreModels(List<Beer> rows)
         {
-            return null;
+            return rows.Select(SearchViewModel.FromCoreModel).ToList();
         }
     }
 }

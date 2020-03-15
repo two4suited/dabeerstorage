@@ -8,6 +8,6 @@ namespace DaBeerStorage.Functions.Interfaces
     public interface ISearchService
     {
         Task<List<SearchViewModel>> SearchByName(ByName name);
-        Task<List<SearchViewModel>>  SearchById(ById id);
+        Task<SearchViewModel>  SearchById(ById id);
     }
 }

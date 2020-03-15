@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using DaBeerStorage.Functions.Models;
+using DaBeerStorage.Functions.Untappd.Models.BeerSearch;
+using Beer = DaBeerStorage.Functions.Models.Beer;
 
 namespace DaBeerStorage.Functions.ViewModels
 {
@@ -13,23 +14,28 @@ namespace DaBeerStorage.Functions.ViewModels
         public string Ibu { get; set; }
         public string Rating { get; set; }
         public string BreweryState { get; set; }
-        public static SearchViewModel FromCoreModel(Beer beer)
+        public static SearchViewModel FromItemModel(Item searchResult)
         {
             return new SearchViewModel()
             {
-                Brewery = beer.BreweryName,
-                Description = beer.Description,
-                BeerName = beer.Name,
-                LabelPath = beer.LabelPath,
-                Ibu = beer.Ibu,
-                Rating = beer.Rating,
-                BreweryState = beer.BreweryState
+                Brewery = searchResult.Brewery.BreweryName,
+                Description = searchResult.Beer.BeerDescription,
+                BeerName = searchResult.Beer.BeerName,
+                LabelPath =searchResult.Beer.BeerLabel,
+                Ibu = searchResult.Beer.BeerIbu.ToString(),
+                Rating = searchResult.Beer.AuthRating.ToString(),
+                BreweryState = searchResult.Brewery.Location.BreweryState
             };
         }
 
-        public static List<SearchViewModel> FromCoreModels(List<Beer> rows)
+        public static SearchViewModel FromBeerModel(DaBeerStorage.Functions.Untappd.Models.BeerInfo.Beer beer)
         {
-            return rows.Select(SearchViewModel.FromCoreModel).ToList();
+            return null;
+        }
+
+        public static List<SearchViewModel> FromItemModels(IList<Item> rows)
+        {
+            return rows.Select(SearchViewModel.FromItemModel).ToList();
         }
     }
 }

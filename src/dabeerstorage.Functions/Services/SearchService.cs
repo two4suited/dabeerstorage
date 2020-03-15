@@ -17,10 +17,10 @@ namespace DaBeerStorage.Functions.Services
         public async  Task<List<SearchViewModel>>  SearchByName(ByName byName)
         {
             var results = await _repository.SearchByName(1, byName.SearchValue);
-            return null;
+            return SearchViewModel.FromItemModels(results);
         }
 
-        public async  Task<List<SearchViewModel>>  SearchById(ById byId)
+        public async  Task<SearchViewModel>  SearchById(ById byId)
         {
             var results = await _repository.SearchById(byId.Id);
             return null;

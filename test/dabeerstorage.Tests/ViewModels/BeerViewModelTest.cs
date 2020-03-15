@@ -29,6 +29,9 @@ namespace DaBeerStorage.Tests.ViewModels
             viewModel.LabelPath.ShouldBe(beer.LabelPath);
             viewModel.Style.ShouldBe(beer.Style);
             viewModel.BeerId.ShouldBe(beer.BeerId);
+            viewModel.Ibu.ShouldBe(beer.Ibu);
+            viewModel.BreweryState.ShouldBe(beer.BreweryState);
+            viewModel.Rating.ShouldBe(beer.Rating);
            
         }
 

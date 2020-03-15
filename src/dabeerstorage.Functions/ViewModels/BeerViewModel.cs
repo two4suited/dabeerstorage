@@ -13,6 +13,10 @@ namespace DaBeerStorage.Functions.ViewModels
         public string Style { get; set; }
         public string Brewery { get; set; }
         public string BeerId { get; set; }
+
+        public string Ibu { get; set; }
+        public string Rating { get; set; }
+        public string BreweryState { get; set; }
         public static BeerViewModel FromCoreModel(Beer beer)
         {
             return new BeerViewModel()
@@ -22,7 +26,10 @@ namespace DaBeerStorage.Functions.ViewModels
                 Brewery = beer.BreweryName,
                 Style = beer.Style,
                 BeerId = beer.BeerId,
-                LabelPath = beer.LabelPath
+                LabelPath = beer.LabelPath,
+                Ibu = beer.Ibu,
+                Rating = beer.Rating,
+                BreweryState = beer.BreweryState
             };
         }
 

@@ -8,6 +8,9 @@ namespace DaBeerStorage.Functions.ViewModels
         public string Brewery { get; set; }
         public string Description { get; set; }
         public string LabelPath { get; set; }
+        public string Ibu { get; set; }
+        public string Rating { get; set; }
+        public string BreweryState { get; set; }
         public static SearchViewModel FromCoreModel(Beer beer)
         {
             return new SearchViewModel()
@@ -15,7 +18,10 @@ namespace DaBeerStorage.Functions.ViewModels
                 Brewery = beer.BreweryName,
                 Description = beer.Description,
                 BeerName = beer.Name,
-                LabelPath = beer.LabelPath
+                LabelPath = beer.LabelPath,
+                Ibu = beer.Ibu,
+                Rating = beer.Rating,
+                BreweryState = beer.BreweryState
             };
         }
     }

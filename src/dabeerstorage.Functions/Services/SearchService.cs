@@ -23,7 +23,7 @@ namespace DaBeerStorage.Functions.Services
         public async  Task<SearchViewModel>  SearchById(ById byId)
         {
             var results = await _repository.SearchById(byId.Id);
-            return null;
+            return SearchViewModel.FromBeerModel(results);
         }
     }
 }

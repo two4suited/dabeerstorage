@@ -30,7 +30,16 @@ namespace DaBeerStorage.Functions.ViewModels
 
         public static SearchViewModel FromBeerModel(DaBeerStorage.Functions.Untappd.Models.BeerInfo.Beer beer)
         {
-            return null;
+            return new SearchViewModel()
+            {
+                Brewery = beer.Brewery.BreweryName,
+                Description = beer.BeerDescription,
+                BeerName = beer.BeerName,
+                LabelPath =beer.BeerLabel.AbsoluteUri,
+                Ibu = beer.BeerIbu.ToString(),
+                Rating = beer.AuthRating.ToString(),
+                BreweryState = beer.Brewery.Location.BreweryState
+            };
         }
 
         public static List<SearchViewModel> FromItemModels(IList<Item> rows)

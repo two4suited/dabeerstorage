@@ -25,5 +25,13 @@ namespace DaBeerStorage.Tests.Services
             _sut.Add(location);
             _storage.Verify(x => x.AddLocation(It.IsAny<string>(),It.IsAny<Location>()),Times.Once);
         }
+
+        [Theory, AutoData]
+        public void ListLocation_Should_Call_Method(ListLocation listLocation)
+        {
+            _sut.List(listLocation);
+            
+            _storage.Verify(x => x.ListLocation(It.IsAny<string>()),Times.Once);
+        }
     }
 }

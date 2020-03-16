@@ -19,7 +19,7 @@ namespace DaBeerStorage.Tests.Functions.BeerFunction
             mut = new DaBeerStorage.Functions.BeerFunction(Host);
         }
         
-        protected void ReturnOk_WhenRequestIsValid<T,TQ>(
+        protected void Return_BadRequest_WhenRequestIsValid<T,TQ>(
             Func<APIGatewayProxyRequest, TestLambdaContext, APIGatewayProxyResponse> method,
             T objectToTest
         ) where TQ:AbstractValidator<T>,new()
@@ -28,16 +28,13 @@ namespace DaBeerStorage.Tests.Functions.BeerFunction
             var request = new APIGatewayProxyRequest() {Body = JsonConvert.SerializeObject(objectToTest)};
             var moqFunction = new Mock<DaBeerStorage.Functions.BeerFunction>() {CallBase = true};
             var nullResponse =
-                moqFunction.Setup(x => x.CheckRequest(It.IsAny<APIGatewayProxyRequest>()))
+                moqFunction.Setup(x => x.CheckRequest<T,TQ>(It.IsAny<APIGatewayProxyRequest>()))
                     .Returns((APIGatewayProxyResponse) null);
-            moqFunction.Setup(x =>
-                x.ValidateObject<T, TQ>(
-                    It.IsAny<APIGatewayProxyRequest>())).Returns((APIGatewayProxyResponse) null);
+           
 
             var actual = method(request, It.IsAny<TestLambdaContext>());
-
-            actual.StatusCode.ShouldBe((int)HttpStatusCode.BadRequest);
-            actual.Body.ShouldNotBeNull();
+            
+            actual.Body.ShouldContain("Object is invalid");
 
         }
 
@@ -48,9 +45,8 @@ namespace DaBeerStorage.Tests.Functions.BeerFunction
             var request = new APIGatewayProxyRequest() {Body = JsonConvert.SerializeObject(objectToTest)};
             var moqFunction = new Mock<DaBeerStorage.Functions.BeerFunction>() { CallBase = true};
             var nullResponse = 
-                moqFunction.Setup(x => x.CheckRequest(It.IsAny<APIGatewayProxyRequest>())).Returns((APIGatewayProxyResponse)null);
-            moqFunction.Setup(x => x.ValidateObject<T,TQ>(It.IsAny<APIGatewayProxyRequest>())).Returns((APIGatewayProxyResponse)null);
-         
+                moqFunction.Setup(x => x.CheckRequest<T,TQ>(It.IsAny<APIGatewayProxyRequest>())).Returns((APIGatewayProxyResponse)null);
+       
             var actual = method(request, It.IsAny<TestLambdaContext>());
 
             actual.StatusCode.ShouldBe((int)HttpStatusCode.OK);

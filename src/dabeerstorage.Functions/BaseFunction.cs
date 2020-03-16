@@ -53,12 +53,13 @@ namespace DaBeerStorage.Functions
         {
             
             IValidator<T> validator = new TQ();
-            var createBody = JsonConvert.DeserializeObject<Create>(request.Body);
-            var validationResults = validator.Validate(createBody);
+            var body = JsonConvert.DeserializeObject<T>(request.Body);
+            var validationResults = validator.Validate(body);
             
             if (!validationResults.IsValid)
             {
                 var sb = new StringBuilder();
+                sb.Append("Object is invalid");
                 validationResults.Errors.ToList().ForEach(x => sb.Append(x));
                 var combinedList = sb.ToString();
 
@@ -90,10 +91,10 @@ namespace DaBeerStorage.Functions
             };
         }
 
-        public virtual APIGatewayProxyResponse CheckRequest(APIGatewayProxyRequest request)
+        public virtual APIGatewayProxyResponse CheckRequest<T,TQ>(APIGatewayProxyRequest request)where TQ:AbstractValidator<T>,new() 
         {
             if (request == null) return NullRequest();
-            return request.Body == null ? NullModelRequest() : null;
+            return request.Body == null ? NullModelRequest() : ValidateObject<T, TQ>(request);
         }
     }
 }

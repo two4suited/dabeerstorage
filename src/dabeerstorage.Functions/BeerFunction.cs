@@ -25,20 +25,16 @@ namespace DaBeerStorage.Functions
       
         public APIGatewayProxyResponse Create(APIGatewayProxyRequest request, ILambdaContext context)
         {
-            var check = CheckRequest(request);
+            var check = CheckRequest<Create,CreateValidator>(request);
 
             if (check != null) return check;
            
-            var validate = ValidateObject<Create,CreateValidator>(request);
-
-            if (validate != null) return validate;
-
             return Ok(request.Body);
 
         }
         public APIGatewayProxyResponse Drink(APIGatewayProxyRequest request,ILambdaContext context)
         {
-            return CheckRequest(request) ?? null;
+            return CheckRequest<Drink,DrinkValidator>(request) ?? null;
         }
         
         public APIGatewayProxyResponse ListNotDrank(APIGatewayProxyRequest request, ILambdaContext context)
@@ -47,7 +43,7 @@ namespace DaBeerStorage.Functions
         }
          public APIGatewayProxyResponse Move(APIGatewayProxyRequest request, ILambdaContext context)
          {
-             return CheckRequest(request) ?? null;    
+             return CheckRequest<Move,MoveValidator>(request) ?? null;    
          }
     }
 }

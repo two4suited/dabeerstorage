@@ -33,7 +33,7 @@ namespace DaBeerStorage.Tests.Functions.BeerFunction
          
             var actual = moqFunction.Object.Create(It.IsAny<APIGatewayProxyRequest>(), It.IsAny<ILambdaContext>());
 
-            moqFunction.Verify(x => x.CheckRequest(It.IsAny<APIGatewayProxyRequest>()),Times.Once);
+            moqFunction.Verify(x => x.CheckRequest<DaBeerStorage.Functions.ApiModels.Beer.Create,CreateValidator>(It.IsAny<APIGatewayProxyRequest>()),Times.Once);
         }
         
         [Theory,AutoData]
@@ -46,7 +46,7 @@ namespace DaBeerStorage.Tests.Functions.BeerFunction
         public void Should_Return_ErrorList_When_Object_Has_Invalid_Data(DaBeerStorage.Functions.ApiModels.Beer.Create createObject)
         {
             createObject.Description = null;
-            ReturnOk_WhenRequestIsValid<DaBeerStorage.Functions.ApiModels.Beer.Create,CreateValidator>(mut.Create,createObject);
+            Return_BadRequest_WhenRequestIsValid<DaBeerStorage.Functions.ApiModels.Beer.Create,CreateValidator>(mut.Create,createObject);
         }
     }
 }

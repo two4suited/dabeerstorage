@@ -19,7 +19,7 @@ namespace DaBeerStorage.Tests.Functions.BeerFunction
             ReturnBadRequest_WhenModeInRequestIsNull(mut.ListNotDrank).StatusCode.ShouldBe(BadRequest);
 
         [Fact]
-        public void Should_Call_CheckRequest() => Call_CheckRequest<ListNotDrank,ListNotDrankValidator>(moqFunction.Object.Create);
+        public void Should_Call_CheckRequest() => Call_CheckRequest<ListNotDrank,ListNotDrankValidator>(moqFunction.Object.ListNotDrank);
 
         [Theory,AutoData]
         public void Should_Return_Ok_When_Request_Is_Valid(ListNotDrank objectTest)
@@ -31,7 +31,7 @@ namespace DaBeerStorage.Tests.Functions.BeerFunction
         public void Should_Return_ErrorList_When_Object_Has_Invalid_Data(ListNotDrank objectTest)
         {
             objectTest.Location = null;
-            Return_BadRequest_WhenRequestIsValid<ListNotDrank,ListNotDrankValidator>(mut.Create,objectTest);
+            Return_BadRequest_WhenRequestIsValid<ListNotDrank,ListNotDrankValidator>(mut.ListNotDrank,objectTest);
         }
         
     }

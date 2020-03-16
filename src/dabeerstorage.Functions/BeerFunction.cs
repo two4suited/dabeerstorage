@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using Amazon.DynamoDBv2;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using DaBeerStorage.Functions.ApiModels.Beer;
@@ -34,16 +35,16 @@ namespace DaBeerStorage.Functions
         }
         public APIGatewayProxyResponse Drink(APIGatewayProxyRequest request,ILambdaContext context)
         {
-            return CheckRequest<Drink,DrinkValidator>(request) ?? null;
+            return CheckRequest<Drink,DrinkValidator>(request) ?? Ok(request.Body);
         }
         
         public APIGatewayProxyResponse ListNotDrank(APIGatewayProxyRequest request, ILambdaContext context)
         {
-            return request == null ? NullRequest() : null; 
+            return CheckRequest<ListNotDrank, ListNotDrankValidator>(request) ?? Ok(request.Body);
         }
          public APIGatewayProxyResponse Move(APIGatewayProxyRequest request, ILambdaContext context)
          {
-             return CheckRequest<Move,MoveValidator>(request) ?? null;    
+             return CheckRequest<Move,MoveValidator>(request) ?? Ok(request.Body);    
          }
     }
 }

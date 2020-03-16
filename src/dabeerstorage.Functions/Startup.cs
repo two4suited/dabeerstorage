@@ -1,6 +1,9 @@
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
+using DaBeerStorage.Functions.ApiModels.Beer;
 using DaBeerStorage.Functions.Config;
+using DaBeerStorage.Functions.Validators.ApiModels.Beer;
+using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -34,6 +37,7 @@ namespace DaBeerStorage.Functions
                 s.AddDefaultAWSOptions(c.Configuration.GetAWSOptions());
                 s.AddAWSService<IAmazonDynamoDB>();
                 s.AddTransient<IDynamoDBContext, DynamoDBContext>();
+                s.AddTransient<IValidator<Create>,CreateValidator>();
 
                 s.AddLogging(x =>
                 {

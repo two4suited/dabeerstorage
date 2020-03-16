@@ -1,6 +1,14 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Text;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
+using DaBeerStorage.Functions.ApiModels.Beer;
+using DaBeerStorage.Functions.Validators.ApiModels.Beer;
+using FluentValidation;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 
@@ -20,6 +28,10 @@ namespace DaBeerStorage.Functions
             var check = CheckRequest(request);
 
             if (check != null) return check;
+           
+            var validate = ValidateObject<Create,CreateValidator>(request);
+
+            if (validate != null) return validate;
 
             return Ok(request.Body);
 

@@ -1,8 +1,14 @@
 using System;
 using System.Net;
 using Amazon.Lambda.APIGatewayEvents;
+using Amazon.Lambda.Core;
 using Amazon.Lambda.TestUtilities;
+using DaBeerStorage.Functions.Validators.ApiModels.Beer;
+using FluentValidation;
 using Microsoft.Extensions.Hosting;
+using Moq;
+using Newtonsoft.Json;
+using Shouldly;
 
 namespace DaBeerStorage.Tests.Functions
 {
@@ -16,18 +22,17 @@ namespace DaBeerStorage.Tests.Functions
         protected BaseFunctionTest()
         {
             var hostBuilder = new HostBuilder();
-                
-            hostBuilder.ConfigureServices((c, s) =>
-                { });
-            Host =  hostBuilder.Build();
-            
+
+            hostBuilder.ConfigureServices((c, s) => { });
+            Host = hostBuilder.Build();
+
             Context = new TestLambdaContext();
         }
 
         protected APIGatewayProxyResponse ReturnBadRequest_WhenRequestIsNull(
-            Func<APIGatewayProxyRequest,TestLambdaContext, APIGatewayProxyResponse> method)
+            Func<APIGatewayProxyRequest, TestLambdaContext, APIGatewayProxyResponse> method)
         {
-            return method(null,Context);
+            return method(null, Context);
         }
 
         protected APIGatewayProxyResponse ReturnBadRequest_WhenModeInRequestIsNull(
@@ -37,5 +42,6 @@ namespace DaBeerStorage.Tests.Functions
 
             return method(request, Context);
         }
+        
     }
 }

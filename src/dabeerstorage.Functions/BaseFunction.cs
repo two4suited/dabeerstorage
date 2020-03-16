@@ -1,15 +1,21 @@
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Text;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
+using DaBeerStorage.Functions.ApiModels.Beer;
+using DaBeerStorage.Functions.Interfaces;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 namespace DaBeerStorage.Functions
 {
-    public class BaseFunction
+    public  class BaseFunction 
     {
         protected readonly IHost Host;
 
@@ -43,6 +49,34 @@ namespace DaBeerStorage.Functions
             };
         }
 
+        public virtual APIGatewayProxyResponse ValidateObject<T,TQ>(APIGatewayProxyRequest request) where TQ:AbstractValidator<T>,new() 
+        {
+            
+            IValidator<T> validator = new TQ();
+            var createBody = JsonConvert.DeserializeObject<Create>(request.Body);
+            var validationResults = validator.Validate(createBody);
+            
+            if (!validationResults.IsValid)
+            {
+                var sb = new StringBuilder();
+                validationResults.Errors.ToList().ForEach(x => sb.Append(x));
+                var combinedList = sb.ToString();
+
+                return new APIGatewayProxyResponse()
+                {
+
+                    Body = JsonConvert.SerializeObject(combinedList),
+                    StatusCode = (int) HttpStatusCode.BadRequest,
+                    Headers = new Dictionary<string, string>
+                    {
+                        {"Content-Type", "application/json"}
+                    }
+                };
+            }
+
+            return null;
+        }
+
         private APIGatewayProxyResponse NullModelRequest()
         {
             return new APIGatewayProxyResponse()
@@ -56,7 +90,7 @@ namespace DaBeerStorage.Functions
             };
         }
 
-        protected APIGatewayProxyResponse CheckRequest(APIGatewayProxyRequest request)
+        public virtual APIGatewayProxyResponse CheckRequest(APIGatewayProxyRequest request)
         {
             if (request == null) return NullRequest();
             return request.Body == null ? NullModelRequest() : null;
